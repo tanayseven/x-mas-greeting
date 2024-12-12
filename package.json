@@ -1,0 +1,19 @@
+{
+	"name": "temp-secret-santa-game",
+	"type": "module",
+	"scripts": {
+		"build": "vite build",
+		"dev": "vite",
+		"preview": "vite preview",
+		"zip": "npm run build && mkdir -p dist && zip -r dist/game.zip dist -x \"**/.DS_Store\"",
+		"check": "tsc"
+	},
+	"dependencies": {
+		"kaplay": "^3001.1.0-beta.0"
+	},
+	"devDependencies": {
+		"@types/node": "^22.10.2",
+		"typescript": "^5.7.2",
+		"vite": "^6.0.3"
+	}
+}
