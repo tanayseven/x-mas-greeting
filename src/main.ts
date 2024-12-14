@@ -73,6 +73,8 @@ const playerSprite = k.add([
   k.scale(3),
 ]);
 
+k.setBackground(k.Color.fromHex("#f0f0f0"));
+
 playerSprite.play("idleDown");
 
 k.onKeyPress("right", () => {

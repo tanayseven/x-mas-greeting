@@ -28,5 +28,19 @@ will build your game and package into a .zip file, you can upload to your server
 
 ## TODO
 
-- [ ] Create a player Witch character
-- [ ] 
+- [X] Create a player character that moves
+- [ ] Plan a proper story for the game
+- [ ] Food game? Chaat game?
+- [ ] Add simple chat foods
+- [ ] Possible chat foods
+  - [ ] Pani Puri
+  - [ ] Bhel Puri
+  - [ ] Sev Puri
+  - [ ] Dahi Puri
+  - [ ] Ragda Puri
+  - [ ] Pav Bhaji
+  - [ ] Vada Pav
+  - [ ] Misal Pav
+  - [ ] Samosa Pav
+  - [ ] Kachori
+
