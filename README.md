@@ -30,17 +30,12 @@ will build your game and package into a .zip file, you can upload to your server
 
 - [X] Create a player character that moves
 - [ ] Plan a proper story for the game
-- [ ] Food game? Chaat game?
-- [ ] Add simple chat foods
-- [ ] Possible chat foods
-  - [ ] Pani Puri
-  - [ ] Bhel Puri
-  - [ ] Sev Puri
-  - [ ] Dahi Puri
-  - [ ] Ragda Puri
-  - [ ] Pav Bhaji
-  - [ ] Vada Pav
-  - [ ] Misal Pav
-  - [ ] Samosa Pav
-  - [ ] Kachori
-
+- [ ] Add a camera on the player
+- [ ] Christmas Greeting Card that will have the following activities
+  - [ ] Edit the sprites in the necessary way 
+  - [ ] Put a Christmas tree which can be decorated
+  - [ ] Put streetlights without Wreath and then add a way to add the Wreath
+  - [ ] Try removing decoration from the existing buildings
+  - [ ] Try to have a house decoration system in place
+  - [ ] Add a destroyed snowman and make a way to build it
+  - [ ] Create a UI for inputting the sender's name and the recipient's name
