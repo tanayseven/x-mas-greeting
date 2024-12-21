@@ -11,6 +11,9 @@ export class SnowWall {
       k.sprite("snowWall"),
       k.pos(k.vec2(position.X, position.Y)),
       k.scale(3),
+      k.area(),
+      k.anchor("center"),
+      k.body({ isStatic: true }),
     ])
     wallSprite.play(`${orientation}${wallType}`);
   }

@@ -75,6 +75,8 @@ k.loadSprite('snowWall', 'sprites/winter_global_shadow.png', {
 
 const player = new Player(k);
 
+k.camScale(2);
+
 // place snowWalls in a loop
 for (let wall = 0 ; wall < 1000 ; wall+=45)
   new SnowWall(k, "vertical", (wall/45)%2?0:1, {X: 0, Y: wall})

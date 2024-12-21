@@ -28,6 +28,9 @@ export class Player {
         this.k.sprite("player"),
         this.k.pos(this.k.center()),
         this.k.scale(3),
+        this.k.area(),
+        this.k.body(),
+        this.k.anchor("center")
       ]);
 
       playerSprite.play("idleDown");
@@ -89,6 +92,9 @@ export class Player {
         if (!isPlayerMoving()) {
           playerSprite.play("idleDown");
         }
+      });
+      playerSprite.onUpdate(() => {
+        k.camPos(playerSprite.worldPos());
       });
     }
 }

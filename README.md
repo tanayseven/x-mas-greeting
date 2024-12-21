@@ -29,8 +29,10 @@ will build your game and package into a .zip file, you can upload to your server
 ## TODO
 
 - [X] Create a player character that moves
-- [ ] Add a continuous deployment system to the project 
-- [ ] Add a camera on the player
+- [X] Add a continuous deployment system to the project 
+- [X] Add a camera on the player
+- [X] Add collision to the snow borders
+- [ ] Cut apart all the sprites that might be needed
 - [ ] Christmas Greeting Card that will have the following activities
   - [ ] Edit the sprites in the necessary way 
   - [ ] Put a Christmas tree which can be decorated
