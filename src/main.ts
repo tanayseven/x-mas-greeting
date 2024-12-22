@@ -107,9 +107,6 @@ displayBox.showDisplay("Hi, I'm a game! (Press 'Enter' to continue)", () => {
   })
 })
 
-
-
-
 const getFromUrl = (key: string): string => {
   try {
     const rawName = queryParams.get(key)
