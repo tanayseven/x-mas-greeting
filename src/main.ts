@@ -1,6 +1,8 @@
 import kaplay from "kaplay";
 import {Player} from "./player";
 import {SnowWall} from "./snowWall";
+import {InputBox} from "./inputBox";
+import {DisplayBox} from "./displayBox";
 
 const k = kaplay({
   debug: true,
@@ -67,18 +69,16 @@ k.loadSprite("player", "sprites/player.png", {
   },
 });
 
-k.setCamScale(2);
+// k.setCamScale(2);
 
 const wallLength = 94;
 
-// Create vertical walls
 const wallDimensions = 1530;
 for (let wall = 0 ; wall < wallDimensions ; wall+=wallLength)
   new SnowWall(k, "vertical", {X: 0, Y: wall})
 for (let wall = 0 ; wall < wallDimensions ; wall+=wallLength)
   new SnowWall(k, "vertical", {X: wallDimensions, Y: wall})
 
-// Create horizontal walls
 for (let wall = 60 ; wall < wallDimensions ; wall+=wallLength)
   new SnowWall(k, "horizontal", {X: wall, Y: -35})
 for (let wall = 60 ; wall < wallDimensions ; wall+=wallLength)
@@ -92,3 +92,30 @@ const reindeer = k.add([
 reindeer.play("run");
 
 const player = new Player(k);
+
+const queryParams = new URLSearchParams(window.location.search)
+
+const displayBox = new DisplayBox(k)
+displayBox.showDisplay("Merry Chsristmas")
+
+// const inputBox = new InputBox(k)
+// inputBox.askInput("Enter your name", (value) => {
+// });
+
+const getFromUrl = (key: string): string => {
+  try {
+    const rawName = queryParams.get(key)
+    if (rawName) {
+      return  atob(queryParams.get(key))
+    }
+  } catch (e) {
+    return  ""
+  }
+  return ""
+};
+
+const setToUrl = (key: string, value: string) => {
+  queryParams.set(key, btoa(value));
+  window.history.replaceState({}, '', `${location.pathname}?${queryParams}`);
+}
+
