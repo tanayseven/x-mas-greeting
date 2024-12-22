@@ -15,7 +15,7 @@ export class InputBox {
     setInterval(() => {
       this.cursorShow = !this.cursorShow
       updateInputText()
-    }, 500)
+    }, 300)
 
     onKeyDown("shift", () => {
       this.isShiftPressed = true
@@ -50,9 +50,9 @@ export class InputBox {
     })
 
     onKeyPress("enter", () => {
+      this.closeInput()
       if (this.textEnteredCallback)
         this.textEnteredCallback(this.inputText)
-      this.closeInput()
     });
   }
 

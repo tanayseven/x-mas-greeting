@@ -12,7 +12,7 @@ export class DisplayBox {
 
     onKeyPress("enter", () => {
       this.closeInput()
-      this.callback()
+      if (this.callback) this.callback()
     });
   }
 
