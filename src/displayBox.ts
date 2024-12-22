@@ -5,18 +5,24 @@ export class DisplayBox {
   private displayBox: GameObj
   private displayTextObj: GameObj;
   private displayText: string;
+  private callback: () => void;
 
   constructor(k: KAPLAYCtx<{}, never>) {
     this.k = k;
 
     onKeyPress("enter", () => {
       this.closeInput()
+      this.callback()
     });
   }
 
   private closeInput = () => {
-    this.displayBox.destroy()
-    this.displayTextObj.destroy()
+    if (this.displayBox) {
+      this.displayBox.destroy()
+    }
+    if (this.displayTextObj) {
+      this.displayTextObj.destroy()
+    }
   }
   private newDisplayBox = () => {
     this.displayBox = add([
@@ -39,8 +45,9 @@ export class DisplayBox {
       this.k.fixed(),
     ]);
   }
-  showDisplay = (text: string) => {
+  showDisplay = (text: string, callback: ()=>void) => {
     this.displayText = text
+    this.callback = callback
     this.newDisplayBox()
   }
 }

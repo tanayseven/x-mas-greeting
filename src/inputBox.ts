@@ -26,7 +26,8 @@ export class InputBox {
     })
 
     const updateInputText = () => {
-      this.inputTextObj.text = `${this.inputPrompt}: ${this.inputText} ${this.getCursor()}`
+      if (this.inputTextObj)
+        this.inputTextObj.text = `${this.inputPrompt}: ${this.inputText} ${this.getCursor()}`
     };
 
     onKeyPressRepeat("backspace", () => {
@@ -49,18 +50,22 @@ export class InputBox {
     })
 
     onKeyPress("enter", () => {
-      this.textEnteredCallback(this.inputText)
+      if (this.textEnteredCallback)
+        this.textEnteredCallback(this.inputText)
       this.closeInput()
     });
   }
+
   private newInputBox = () => {
-    this.inputBox = add([
+
+    this.inputBox = this.k.add([
       rect(width() - 140, 140, { radius: 4 }),
       anchor("center"),
       pos(center().x, height() - 100),
       outline(4),
       this.k.fixed(),
     ]);
+
     this.inputTextObj = this.k.add([
       text(`${this.inputPrompt}: ${this.inputText} ${getCursor()}`, {
         font: "monospace",
@@ -73,7 +78,9 @@ export class InputBox {
       this.k.color(0, 0, 0),
       this.k.fixed(),
     ]);
+
   }
+
   askInput = (prompt: string, callback: (value: string) => void) => {
     this.inputPrompt = prompt
     this.inputText = ""
@@ -85,7 +92,11 @@ export class InputBox {
   }
 
   private closeInput() {
-    this.k.destroy(this.inputBox)
-    this.k.destroy(this.inputTextObj)
+    if (this.inputBox) {
+      this.inputBox.destroy()
+    }
+    if (this.inputTextObj) {
+      this.inputTextObj.destroy()
+    }
   }
 }

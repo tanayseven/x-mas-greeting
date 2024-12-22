@@ -96,11 +96,19 @@ const player = new Player(k);
 const queryParams = new URLSearchParams(window.location.search)
 
 const displayBox = new DisplayBox(k)
-displayBox.showDisplay("Merry Chsristmas")
+const inputBox = new InputBox(k)
+displayBox.showDisplay("Hi, I'm a game! (Press 'Enter' to continue)", () => {
+  displayBox.showDisplay("But I'm not just a game, I'm also an e-greeting card", () => {
+    displayBox.showDisplay("Let's get the card ready for the recipient", () => {
+      inputBox.askInput("Enter your name", (value) => {
 
-// const inputBox = new InputBox(k)
-// inputBox.askInput("Enter your name", (value) => {
-// });
+      });
+    })
+  })
+})
+
+
+
 
 const getFromUrl = (key: string): string => {
   try {
