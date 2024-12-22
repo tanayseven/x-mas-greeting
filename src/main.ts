@@ -12,6 +12,17 @@ k.setBackground(k.Color.fromHex("#D5FCFF"));
 
 k.loadSprite('snowWallVertical', 'sprites/snow-border-vertical.png');
 k.loadSprite('snowWallHorizontal', 'sprites/snow-border-horizontal.png');
+k.loadSprite('reindeer', 'sprites/reindeer.png', {
+  sliceX: 3,
+  anims: {
+    run: {
+      from: 0,
+      to: 2,
+      speed: 5,
+      loop: true,
+    },
+  }
+});
 
 k.loadSprite("player", "sprites/player.png", {
   sliceX: 6,
@@ -56,9 +67,7 @@ k.loadSprite("player", "sprites/player.png", {
   },
 });
 
-const player = new Player(k);
-
-// k.setCamScale(2);
+k.setCamScale(2);
 
 const wallLength = 94;
 
@@ -74,3 +83,12 @@ for (let wall = 60 ; wall < wallDimensions ; wall+=wallLength)
   new SnowWall(k, "horizontal", {X: wall, Y: -35})
 for (let wall = 60 ; wall < wallDimensions ; wall+=wallLength)
   new SnowWall(k, "horizontal", {X: wall, Y: wallDimensions})
+
+const reindeer = k.add([
+  k.sprite("reindeer"),
+  k.pos(30, 10),
+  k.scale(2),
+])
+reindeer.play("run");
+
+const player = new Player(k);
