@@ -5,6 +5,7 @@
 		"moduleResolution": "node"
 	},
 	"include": [
-		"src/**/*.ts"
-	]
+      "src/**/*.ts",
+      "node_modules/kaplay/dist/declaration/global.d.ts"
+    ]
 }

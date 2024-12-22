@@ -1,6 +1,6 @@
 import {KAPLAYCtx} from "kaplay/dist/declaration/types";
 
-const playerSpeed = 100;
+const playerSpeed = 500;
 
 type PlayerMoving = {
   right: boolean;
@@ -26,9 +26,9 @@ export class Player {
       this.k = k;
       const playerSprite = this.k.add([
         this.k.sprite("player"),
-        this.k.pos(this.k.center()),
+        this.k.pos(1300, 20),
         this.k.scale(3),
-        this.k.area(),
+        this.k.area({ shape: new Polygon([vec2(-5, -10), vec2(-5, 7), vec2(5, 7), vec2(5, -10)]) }),
         this.k.body(),
         this.k.anchor("center")
       ]);
@@ -94,7 +94,7 @@ export class Player {
         }
       });
       playerSprite.onUpdate(() => {
-        k.camPos(playerSprite.worldPos());
+        k.setCamPos(playerSprite.worldPos());
       });
     }
 }

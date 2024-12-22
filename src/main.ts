@@ -2,10 +2,16 @@ import kaplay from "kaplay";
 import {Player} from "./player";
 import {SnowWall} from "./snowWall";
 
-const k = kaplay();
+const k = kaplay({
+  debug: true,
+  debugKey: "/",
+});
 
 k.loadRoot("./");
 k.setBackground(k.Color.fromHex("#D5FCFF"));
+
+k.loadSprite('snowWallVertical', 'sprites/snow-border-vertical.png');
+k.loadSprite('snowWallHorizontal', 'sprites/snow-border-horizontal.png');
 
 k.loadSprite("player", "sprites/player.png", {
   sliceX: 6,
@@ -50,36 +56,21 @@ k.loadSprite("player", "sprites/player.png", {
   },
 });
 
-k.loadSprite('snowWall', 'sprites/winter_global_shadow.png', {
-  sliceX: 36,
-  sliceY: 33,
-  anims: {
-    vertical0: {
-      from: 953,
-      to: 953,
-    },
-    vertical1: {
-      from: 917,
-      to: 917,
-    },
-    horizontal0: {
-      from: 1,
-      to: 1,
-    },
-    horizontal1: {
-      from: 1,
-      to: 1,
-    },
-  }
-});
-
 const player = new Player(k);
 
-k.camScale(2);
+// k.setCamScale(2);
 
-// place snowWalls in a loop
-for (let wall = 0 ; wall < 1000 ; wall+=45)
-  new SnowWall(k, "vertical", (wall/45)%2?0:1, {X: 0, Y: wall})
-const width = window.screen.width-45;
-for (let wall = 0 ; wall < 1000 ; wall+=45)
-  new SnowWall(k, "vertical", (wall/45)%2?0:1, {X: width, Y: wall})
+const wallLength = 94;
+
+// Create vertical walls
+const wallDimensions = 1530;
+for (let wall = 0 ; wall < wallDimensions ; wall+=wallLength)
+  new SnowWall(k, "vertical", {X: 0, Y: wall})
+for (let wall = 0 ; wall < wallDimensions ; wall+=wallLength)
+  new SnowWall(k, "vertical", {X: wallDimensions, Y: wall})
+
+// Create horizontal walls
+for (let wall = 60 ; wall < wallDimensions ; wall+=wallLength)
+  new SnowWall(k, "horizontal", {X: wall, Y: -35})
+for (let wall = 60 ; wall < wallDimensions ; wall+=wallLength)
+  new SnowWall(k, "horizontal", {X: wall, Y: wallDimensions})
