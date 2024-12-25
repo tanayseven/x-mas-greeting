@@ -98,9 +98,20 @@ const displayBox = new DisplayBox(k)
 displayBox.showDisplay("Hi, I'm a game!", () => {
   displayBox.showDisplay("But I'm not just a game, I'm also an e-greeting card", () => {
     displayBox.showDisplay("Let's get the card ready for the recipient", () => {
-      displayBox.askInput("Enter your name", (value) => {
-
-      });
+      displayBox.askInput("Enter your name", (senderName) => {
+        displayBox.askInput("Enter the recipient name", (recipientName) => {
+          setToUrl("senderName", senderName)
+          setToUrl("recipientName", recipientName)
+          const deployedHostname = "https://wishxmas.tanay.tech/"
+          const recipientUrl = `${deployedHostname}?senderName=${btoa(senderName)}&recipientName=${btoa(recipientName)}`
+          navigator.clipboard.writeText(recipientUrl)
+          displayBox.showDisplay(`The URL to send as E-Greeting Card is copied to your clipboard`, () => {
+            displayBox.showDisplay(`You can now paste the URL wherever and share it with the recipient`, () => {
+              
+            })
+          })
+        })
+      })
     })
   })
 })

@@ -21,7 +21,7 @@ export class DisplayBox {
     onKeyPress("enter", () => {
       this.closeDisplayInput()
       if (this.displayCallback) this.displayCallback()
-      if (this.promptCallback) this.promptCallback(this.inputText)
+      if (this.promptCallback && this.inputText.length > 0) this.promptCallback(this.inputText)
     });
 
     onKeyPressRepeat("backspace", () => {
@@ -44,7 +44,7 @@ export class DisplayBox {
     })
 
     const updateInputText = () => {
-      const displayText = this.isDisplayDialog ? `${this.displayText} (Press 'Enter')` : `${this.displayText}: ${this.inputText} ${this.getCursor()}`
+      const displayText = this.isDisplayDialog ? `${this.displayText}\n[Press ↵]` : `${this.displayText}: ${this.inputText} ${this.getCursor()}\n[Press ↵]`
       if (this.displayTextObj)
         this.displayTextObj.text = displayText
     };
