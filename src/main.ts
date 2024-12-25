@@ -1,7 +1,6 @@
 import kaplay from "kaplay";
 import {Player} from "./player";
 import {SnowWall} from "./snowWall";
-import {InputBox} from "./inputBox";
 import {DisplayBox} from "./displayBox";
 
 const k = kaplay({
@@ -96,11 +95,10 @@ const player = new Player(k);
 const queryParams = new URLSearchParams(window.location.search)
 
 const displayBox = new DisplayBox(k)
-const inputBox = new InputBox(k)
-displayBox.showDisplay("Hi, I'm a game! (Press 'Enter' to continue)", () => {
+displayBox.showDisplay("Hi, I'm a game!", () => {
   displayBox.showDisplay("But I'm not just a game, I'm also an e-greeting card", () => {
     displayBox.showDisplay("Let's get the card ready for the recipient", () => {
-      inputBox.askInput("Enter your name", (value) => {
+      displayBox.askInput("Enter your name", (value) => {
 
       });
     })
