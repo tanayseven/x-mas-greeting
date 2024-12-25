@@ -95,26 +95,38 @@ const player = new Player(k);
 const queryParams = new URLSearchParams(window.location.search)
 
 const displayBox = new DisplayBox(k)
-displayBox.showDisplay("Hi, I'm a game!", () => {
-  displayBox.showDisplay("But I'm not just a game, I'm also an e-greeting card", () => {
-    displayBox.showDisplay("Let's get the card ready for the recipient", () => {
-      displayBox.askInput("Enter your name", (senderName) => {
-        displayBox.askInput("Enter the recipient name", (recipientName) => {
-          setToUrl("senderName", senderName)
-          setToUrl("recipientName", recipientName)
-          const deployedHostname = "https://wishxmas.tanay.tech/"
-          const recipientUrl = `${deployedHostname}?senderName=${btoa(senderName)}&recipientName=${btoa(recipientName)}`
-          navigator.clipboard.writeText(recipientUrl)
-          displayBox.showDisplay(`The URL to send as E-Greeting Card is copied to your clipboard`, () => {
-            displayBox.showDisplay(`You can now paste the URL wherever and share it with the recipient`, () => {
-              
+const senderName = atob(queryParams.get("senderName"))
+const recipientName = atob(queryParams.get("recipientName"))
+const receivedByRecipient = senderName && recipientName;
+if (receivedByRecipient) {
+  displayBox.showDisplay(`Hi ${recipientName},`, () => {
+    displayBox.showDisplay(`Wishing you a Merry Christmas and a Happy New Year!`, () => {
+      displayBox.showDisplay(`From ${senderName}`, () => {
+      })
+    })
+  })
+}
+if (!receivedByRecipient) {
+  displayBox.showDisplay("Hi, I'm a game!", () => {
+    displayBox.showDisplay("But I'm not just a game, I'm also an e-greeting card", () => {
+      displayBox.showDisplay("Let's get the card ready for the recipient", () => {
+        displayBox.askInput("Enter your name", (senderName) => {
+          displayBox.askInput("Enter the recipient name", (recipientName) => {
+            setToUrl("senderName", senderName)
+            setToUrl("recipientName", recipientName)
+            const deployedHostname = "https://wishxmas.tanay.tech/"
+            // const deployedHostname = "http://localhost:3001/"
+            const recipientUrl = `${deployedHostname}?senderName=${btoa(senderName)}&recipientName=${btoa(recipientName)}`
+            navigator.clipboard.writeText(recipientUrl)
+            displayBox.showDisplay(`The URL to send as E-Greeting Card is copied to your clipboard`, () => {
+              displayBox.showDisplay(`You can now paste the URL wherever and share it with the recipient`, () => {})
             })
           })
         })
       })
     })
   })
-})
+}
 
 const getFromUrl = (key: string): string => {
   try {
