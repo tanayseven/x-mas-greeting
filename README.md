@@ -11,7 +11,7 @@ A Greeting Card to wish your loved ones a Merry Christmas
 - [X] Add a camera on the player
 - [X] Add collision to the snow borders
 - [X] Cut apart all the sprites that might be needed, using GIMP
-- [ ] Add UI to enter the sender's name and the recipient's name
+- [X] Add UI to enter the sender's name and the recipient's name
 - [ ] Lights spread around the map
 - [ ] A reindeer that can be decorated with lights
 - [ ] A Christmas tree that can be decorated with lights

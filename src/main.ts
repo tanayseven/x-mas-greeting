@@ -97,7 +97,7 @@ const queryParams = new URLSearchParams(window.location.search)
 const displayBox = new DisplayBox(k)
 const sender = atob(queryParams.get("sender"))
 const recipient = atob(queryParams.get("recipient"))
-const receivedByRecipient = sender && recipient;
+const receivedByRecipient = queryParams.get("recipient") && queryParams.get("sender")
 if (receivedByRecipient) {
   displayBox.showDisplay(`Hi ${recipient},`, () => {
     displayBox.showDisplay(`Wishing you a Merry Christmas and a Happy New Year!`, () => {
@@ -114,8 +114,7 @@ if (!receivedByRecipient) {
           displayBox.askInput("Enter the recipient name", (recipient) => {
             setToUrl("sender", sender)
             setToUrl("recipient", recipient)
-            // Read deployed hostname from the environment
-            const deployedHostname = process.env.DEPLOYED_HOSTNAME || "https://localhost:3001"
+            const deployedHostname = import.meta.env.DEPLOYED_HOSTNAME || "https://localhost:3001"
             const recipientUrl = `${deployedHostname}?senderName=${btoa(sender)}&recipientName=${btoa(recipient)}`
             navigator.clipboard.writeText(recipientUrl)
             displayBox.showDisplay(`The URL to send as E-Greeting Card is copied to your clipboard`, () => {
