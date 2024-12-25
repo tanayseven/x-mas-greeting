@@ -1,4 +1,4 @@
-import {KAPLAYCtx} from "kaplay/dist/declaration/types";
+import {GameObj, KAPLAYCtx} from "kaplay/dist/declaration/types";
 
 const playerSpeed = 500;
 
@@ -22,6 +22,7 @@ const isPlayerMoving = () => {
 
 export class Player {
     k:  KAPLAYCtx<{}, never>;
+    playerSprite: GameObj;
     constructor(k:  KAPLAYCtx<{}, never>) {
       this.k = k;
       const playerSprite = this.k.add([
@@ -96,5 +97,13 @@ export class Player {
       playerSprite.onUpdate(() => {
         k.setCamPos(playerSprite.worldPos());
       });
+      this.playerSprite = playerSprite
     }
+
+  onCollide(objName: string, callback: (obj) => void) {
+    this.playerSprite.onCollide(objName, (obj) => {
+      console.log(`Player collided with ${objName}`);
+      callback(obj);
+    });
+  }
 }

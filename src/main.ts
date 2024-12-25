@@ -2,6 +2,7 @@ import kaplay from "kaplay";
 import {Player} from "./player";
 import {SnowWall} from "./snowWall";
 import {DisplayBox} from "./displayBox";
+import {GameObj} from "kaplay/dist/declaration/types";
 
 const k = kaplay({
   debug: true,
@@ -14,11 +15,17 @@ k.setBackground(k.Color.fromHex("#D5FCFF"));
 k.loadSprite('snowWallVertical', 'sprites/snow-border-vertical.png');
 k.loadSprite('snowWallHorizontal', 'sprites/snow-border-horizontal.png');
 k.loadSprite('reindeer', 'sprites/reindeer.png', {
-  sliceX: 3,
+  sliceX: 4,
   anims: {
-    run: {
+    noLights: {
       from: 0,
-      to: 2,
+      to: 0,
+      speed: 5,
+      loop: true,
+    },
+    lights: {
+      from: 1,
+      to: 3,
       speed: 5,
       loop: true,
     },
@@ -68,7 +75,47 @@ k.loadSprite("player", "sprites/player.png", {
   },
 });
 
-// k.setCamScale(2);
+k.loadSprite("light", "sprites/light.png", {
+  sliceX: 2,
+  anims: {
+    flicker: {
+      from: 0,
+      to: 1,
+      speed: 10,
+      loop: true,
+    },
+  },
+})
+
+const lightPositions = Array.from({length: 20}, (_, i) => ({X: Math.random() * k.width(), Y: Math.random() * k.height()}))
+
+const lightObjs = lightPositions.map((position) => {
+  const light = k.add([
+    k.sprite("light"),
+    k.pos(position.X, position.Y),
+    k.scale(3),
+    k.area(),
+    "light",
+  ])
+  light.play("flicker")
+  return light
+});
+
+k.setCamScale(2);
+
+let lights = 0;
+
+const lightsText = k.add([
+  k.text("Lights: 0", {
+    font: "monospace",
+    size: 24,
+  }),
+  k.fixed(),
+  k.pos(10, 10),
+  k.color(0, 0, 0),
+])
+
+const displayBox = new DisplayBox(k)
 
 const wallLength = 94;
 
@@ -85,23 +132,41 @@ for (let wall = 60 ; wall < wallDimensions ; wall+=wallLength)
 
 const reindeer = k.add([
   k.sprite("reindeer"),
-  k.pos(30, 10),
-  k.scale(2),
+  k.pos(70, 70),
+  k.scale(5),
+  k.area(),
+  "reindeer",
 ])
-reindeer.play("run");
+reindeer.play("noLights")
 
 const player = new Player(k);
 
+player.onCollide("light", (light: GameObj) => {
+  light.destroy()
+  lights++;
+  lightsText.text = `Lights: ${lights}`
+})
+
+player.onCollide("reindeer", (reindeer: GameObj) => {
+  if (lights >= 5) {
+    lights -= 5;
+    lightsText.text = `Lights: ${lights}`
+    reindeer.play("lights")
+  } else {
+    displayBox.showDisplay("You need at least 5 lights to light up the reindeer", () => {})
+  }
+})
+
 const queryParams = new URLSearchParams(window.location.search)
 
-const displayBox = new DisplayBox(k)
 const sender = atob(queryParams.get("sender"))
 const recipient = atob(queryParams.get("recipient"))
 const receivedByRecipient = queryParams.get("recipient") && queryParams.get("sender")
 if (receivedByRecipient) {
   displayBox.showDisplay(`Hi ${recipient},`, () => {
-    displayBox.showDisplay(`Wishing you a Merry Christmas and a Happy New Year!`, () => {
+    displayBox.showDisplay(`Wishing you a Merry Christmas 🎄🎅🎁 and a Happy New Year 🎉🎊`, () => {
       displayBox.showDisplay(`From ${sender}`, () => {
+        displayBox.showDisplay(`Feel free to roam around and explore the festive area`, () => {})
       })
     })
   })
