@@ -102,7 +102,6 @@ export class Player {
 
   onCollide(objName: string, callback: (obj) => void) {
     this.playerSprite.onCollide(objName, (obj) => {
-      console.log(`Player collided with ${objName}`);
       callback(obj);
     });
   }

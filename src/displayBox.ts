@@ -76,6 +76,7 @@ export class DisplayBox {
       anchor("center"),
       pos(center().x, height() - 100),
       outline(4),
+      layer("ui"),
       this.k.fixed(),
     ]);
 
@@ -86,6 +87,7 @@ export class DisplayBox {
         width: this.displayBox.width,
         align: "center",
       }),
+      this.k.layer("ui"),
       this.k.anchor("center"),
       this.k.pos(this.displayBox.pos),
       this.k.color(0, 0, 0),
@@ -114,6 +116,7 @@ export class DisplayBox {
     this.inputBox = this.k.add([
       rect(width() - 140, 140, { radius: 4 }),
       anchor("center"),
+      layer("ui"),
       pos(center().x, height() - 100),
       outline(4),
       this.k.fixed(),
@@ -126,6 +129,7 @@ export class DisplayBox {
         width: this.inputBox.width,
         align: "center",
       }),
+      this.k.layer("ui"),
       this.k.anchor("center"),
       this.k.pos(this.inputBox.pos),
       this.k.color(0, 0, 0),

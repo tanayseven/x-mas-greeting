@@ -75,6 +75,8 @@ k.loadSprite("player", "sprites/player.png", {
   },
 });
 
+k.setLayers(["bg", "game", "ui"], "game");
+
 k.loadSprite("light", "sprites/light.png", {
   sliceX: 2,
   anims: {
@@ -95,6 +97,7 @@ const lightObjs = lightPositions.map((position) => {
     k.pos(position.X, position.Y),
     k.scale(3),
     k.area(),
+    k.layer("game"),
     "light",
   ])
   light.play("flicker")
@@ -111,6 +114,7 @@ const lightsText = k.add([
     size: 24,
   }),
   k.fixed(),
+  layer("ui"),
   k.pos(10, 10),
   k.color(0, 0, 0),
 ])
