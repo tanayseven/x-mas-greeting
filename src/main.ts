@@ -114,8 +114,8 @@ if (!receivedByRecipient) {
           displayBox.askInput("Enter the recipient name", (recipient) => {
             setToUrl("sender", sender)
             setToUrl("recipient", recipient)
-            const deployedHostname = import.meta.env.DEPLOYED_HOSTNAME || "https://localhost:3001"
-            const recipientUrl = `${deployedHostname}?senderName=${btoa(sender)}&recipientName=${btoa(recipient)}`
+            const deployedHostname = window.location.href.split("?")[0].includes("itch.io") ? "https://wishxmas.tanay.tech/" : window.location.href.split("?")[0]
+            const recipientUrl = `${deployedHostname}?sender=${btoa(sender)}&recipient=${btoa(recipient)}`
             navigator.clipboard.writeText(recipientUrl)
             displayBox.showDisplay(`The URL to send as E-Greeting Card is copied to your clipboard`, () => {
               displayBox.showDisplay(`You can now paste the URL wherever and share it with the recipient`, () => {})
